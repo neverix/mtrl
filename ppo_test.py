@@ -178,7 +178,6 @@ def make_env(
 
 
 if __name__ == "__main__":
-    model, weights, video_dir, minetest_path, max_steps, show, seed, show_agent_pov = "2x.model", "foundation-model-2x.weights", "videos", "../bin/minetest", 100000, False, 32, False
     # Env settings
     seed = 42
     max_steps = 1000
