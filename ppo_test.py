@@ -1,7 +1,6 @@
 import pickle
 import numpy as np
 from stable_baselines3.common.policies import ActorCriticPolicy
-from sb3_contrib.common.recurrent.policies import RecurrentActorCriticPolicy
 from gym.spaces import Dict as DictOAI, Box, Discrete, MultiDiscrete
 from gym.wrappers import Monitor, TimeLimit, ResizeObservation, FrameStack
 from minetester import Minetest
