@@ -22,6 +22,7 @@ import sys
 if "./video-pre-training" not in sys.path:
     sys.path.append("./video-pre-training")
 from agent import MineRLAgent
+import wandb
 
 
 MINERL_TO_MINETEST_ACTIONS = {
