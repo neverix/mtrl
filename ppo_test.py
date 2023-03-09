@@ -144,7 +144,6 @@ class GetPOV(gym.ObservationWrapper):
 
 
 def make_env(
-        minetest_path: str,
         rank: int,
         seed: int = 0,
         max_steps: int = 1e9,
@@ -186,7 +185,7 @@ if __name__ == "__main__":
     vec_env_cls = SubprocVecEnv
     venv = vec_env_cls(
         [
-            make_env(minetest_path=minetest_path, rank=i, seed=seed, max_steps=max_steps, env_kwargs=env_kwargs)
+            make_env(rank=i, seed=seed, max_steps=max_steps, env_kwargs=env_kwargs)
             for i in range(num_envs)
         ],
     )
