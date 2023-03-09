@@ -159,7 +159,7 @@ def make_env(
             seed=None,  # Create worlds randomly
             world_dir=f"worlds/myworld{rank}",  # Store worlds locally
             minetest_executable=None,
-            xvfb_headless=False,  # TODO Doesn't work on my machine
+            xvfb_headless=True,  # Should work on a TPU VM
             config_path="minetest.conf",  # Needs to be concrete, errors out otherwise
             **env_kwargs,
         )
