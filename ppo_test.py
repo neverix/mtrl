@@ -23,6 +23,7 @@ if "./video-pre-training" not in sys.path:
     sys.path.append("./video-pre-training")
 from agent import MineRLAgent
 import wandb
+import torch_xla.core.xla_model as xm
 
 
 MINERL_TO_MINETEST_ACTIONS = {
@@ -204,7 +205,8 @@ if __name__ == "__main__":
               callback=WandbCallback(
                   model_save_path=f"models/{run.id}",
                   verbose=2
-              )
+              ),
+              device=xm.xla_device()
              )
     run.finish()
 
