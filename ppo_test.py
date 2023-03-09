@@ -5,7 +5,6 @@ from gym.spaces import Dict as DictOAI, Box, Discrete, MultiDiscrete
 from gym.wrappers import Monitor, TimeLimit, ResizeObservation, FrameStack
 from minetester import Minetest
 from stable_baselines3 import PPO
-from sb3_contrib import RecurrentPPO
 from typing import Optional, Dict, Any, List, Tuple
 from stable_baselines3.common.distributions import (
     Distribution,
