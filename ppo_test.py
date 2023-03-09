@@ -6,6 +6,7 @@ from gym.wrappers import Monitor, TimeLimit, ResizeObservation, FrameStack
 from minetester import Minetest
 from stable_baselines3 import PPO
 from typing import Optional, Dict, Any, List, Tuple
+from wandb.integration.sb3 import WandbCallback
 from stable_baselines3.common.distributions import (
     Distribution,
     MultiCategoricalDistribution,
@@ -181,7 +182,7 @@ if __name__ == "__main__":
     env_kwargs = {"display_size": (1024, 600), "fov": 72}
 
     # Create a vectorized environment
-    num_envs = 2  # Number of envs to use (<= number of avail. cpus)
+    num_envs = 4  # Number of envs to use (<= number of avail. cpus)
     vec_env_cls = SubprocVecEnv
     venv = vec_env_cls(
         [
@@ -189,7 +190,20 @@ if __name__ == "__main__":
             for i in range(num_envs)
         ],
     )
+    
+    run = wandb.init(
+        project="sb3-minetest",
+        sync_tensorboard=True,  # auto-upload sb3's tensorboard metrics
+        # monitor_gym=True,  # auto-upload the videos of agents playing the game
+        # save_code=True,  # optional
+    )
 
-    ppo = PPO("CnnPolicy", venv, verbose=1, batch_size=2, n_steps=1)
-    ppo.learn(total_timesteps=25000)
+    ppo = PPO("CnnPolicy", venv, verbose=1, tensorboard_log=f"runs/{run.id}")
+    ppo.learn(total_timesteps=25000,
+              callback=WandbCallback(
+                  model_save_path=f"models/{run.id}",
+                  verbose=2
+              )
+             )
+    run.finish()
 
